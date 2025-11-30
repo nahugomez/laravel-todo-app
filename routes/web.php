@@ -21,6 +21,13 @@ Route::get('/', function () {
 # Create a new task view
 Route::view('/tasks/create', 'create')->name('task.create');
 
+# Edit a task view
+Route::get('/tasks/{id}/edit', function ($id) {
+    return view('edit', [
+        'task' => Task::findOrFail($id),
+    ]);
+})->name('task.edit');
+
 # Get a specific task
 Route::get('/tasks/{id}', function ($id) {
     return view('task', [
@@ -47,6 +54,26 @@ Route::post('/tasks', function (Request $request) {
     # Redirect to the task details
     return redirect()->route('task.show', ['id'=> $task->id])->with('success', 'Task created successfully');
 })->name('task.store');
+
+# Update a task
+Route::put('/tasks/{id}', function (Request $request, $id) {
+    # Validate the request
+    $data = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'long_description' => 'required|string',
+    ]);
+
+    # Update the task
+    $task = Task::findOrFail($id);
+    $task->title = $data['title'];
+    $task->description = $data['description'];
+    $task->long_description = $data['long_description'];
+    $task->save();
+
+    # Redirect to the task details
+    return redirect()->route('task.show', ['id'=> $task->id])->with('success', 'Task updated successfully');
+})->name('task.update');
 
 # Handle fallback routes
 Route::fallback(function () {

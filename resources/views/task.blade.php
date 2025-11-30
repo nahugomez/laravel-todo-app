@@ -11,4 +11,5 @@
     <p>{{ $task->created_at }}</p>
     <p>{{ $task->updated_at }}</p>
     <a href="{{ route('task.index') }}">Back to List</a>
+    <a href="{{ route('task.edit', ['id' => $task->id]) }}">Edit</a>
 @endsection
