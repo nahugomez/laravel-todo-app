@@ -45,7 +45,7 @@ Route::post('/tasks', function (Request $request) {
     $task->save();
 
     # Redirect to the task details
-    return redirect()->route('task.show', ['id'=> $task->id]);
+    return redirect()->route('task.show', ['id'=> $task->id])->with('success', 'Task created successfully');
 })->name('task.store');
 
 # Handle fallback routes

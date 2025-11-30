@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('title', $task->title)
 @section('content')
+    @if (session('success'))
+        <div style="color: green; margin-bottom: 1.5rem;">{{ session('success') }}</div>
+    @endif
     <h1>{{ $task->title }}</h1>
     <p>{{ $task->description }}</p>
     <p>{{ $task->long_description }}</p>
