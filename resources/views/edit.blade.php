@@ -3,44 +3,99 @@
 @section('title', 'Edit Task')
 
 @section('content')
-    <h1>Edit Task</h1>
-    <form method="post" action="{{ route('task.update', ['task' => $task]) }}">
-        @csrf
-        @method('put')
-        <div style="margin-bottom: 1.5rem;">
-            <label for="title"
-                style="display: block; text-transform: uppercase; color: #374151; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem;">Title</label>
-            <input type="text" name="title" id="title" value="{{ $task->title }}"
-                style="display: block; width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem; color: #1f2937; box-sizing: border-box; font-size: 1rem;">
-            @error('title')
-                <div style="color: red; margin-top: 0.5rem;">{{ $message }}</div>
-            @enderror
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Edit Task</h1>
+            <p class="text-gray-600">Update your task information</p>
         </div>
 
-        <div style="margin-bottom: 1.5rem;">
-            <label for="description"
-                style="display: block; text-transform: uppercase; color: #374151; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem;">Description</label>
-            <textarea name="description" id="description" rows="4"
-                style="display: block; width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem; color: #1f2937; box-sizing: border-box; font-size: 1rem; font-family: inherit;">{{ $task->description }}</textarea>
-            @error('description')
-                <div style="color: red; margin-top: 0.5rem;">{{ $message }}</div>
-            @enderror
-        </div>
+        <!-- Form Card -->
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <form method="post" action="{{ route('task.update', ['task' => $task]) }}">
+                @csrf
+                @method('put')
 
-        <div style="margin-bottom: 1.5rem;">
-            <label for="long_description"
-                style="display: block; text-transform: uppercase; color: #374151; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem;">Long
-                Description</label>
-            <textarea name="long_description" id="long_description" rows="10"
-                style="display: block; width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem; color: #1f2937; box-sizing: border-box; font-size: 1rem; font-family: inherit;">{{ $task->long_description }}</textarea>
-                @error('long_description')
-                <div style="color: red; margin-top: 0.5rem;">{{ $message }}</div>
-            @enderror
-        </div>
+                <!-- Title Field -->
+                <div class="mb-6">
+                    <label for="title" class="block text-sm font-semibold text-gray-700 mb-2">
+                        Title
+                    </label>
+                    <input 
+                        type="text" 
+                        name="title" 
+                        id="title" 
+                        value="{{ $task->title }}"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                        placeholder="Enter task title"
+                    >
+                    @error('title')
+                        <div class="mt-2 text-sm text-red-600 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
 
-        <button type="submit"
-            style="background-color: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 0.375rem; border: none; font-weight: 600; cursor: pointer; font-size: 1rem; transition: background-color 0.2s;">Update
-            Task</button>
-    </form>
-    <a href="{{ route('task.index') }}" style="margin-top: 1.5rem; display: block; color: #2563eb; font-weight: 600; text-decoration: none;">Back to List</a>
+                <!-- Description Field -->
+                <div class="mb-6">
+                    <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">
+                        Description
+                    </label>
+                    <textarea 
+                        name="description" 
+                        id="description" 
+                        rows="4"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors resize-none"
+                        placeholder="Enter a brief description"
+                    >{{ $task->description }}</textarea>
+                    @error('description')
+                        <div class="mt-2 text-sm text-red-600 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <!-- Long Description Field -->
+                <div class="mb-8">
+                    <label for="long_description" class="block text-sm font-semibold text-gray-700 mb-2">
+                        Long Description
+                    </label>
+                    <textarea 
+                        name="long_description" 
+                        id="long_description" 
+                        rows="10"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors resize-none"
+                        placeholder="Enter detailed description"
+                    >{{ $task->long_description }}</textarea>
+                    @error('long_description')
+                        <div class="mt-2 text-sm text-red-600 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center justify-between">
+                    <a href="{{ route('task.index') }}" 
+                       class="px-6 py-3 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+                        ← Back to List
+                    </a>
+                    <button 
+                        type="submit"
+                        class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg">
+                        Update Task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
