@@ -9,7 +9,7 @@
         <div style="margin-bottom: 1.5rem;">
             <label for="title"
                 style="display: block; text-transform: uppercase; color: #374151; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem;">Title</label>
-            <input type="text" name="title" id="title"
+            <input type="text" name="title" id="title" value="{{ old('title') }}"
                 style="display: block; width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem; color: #1f2937; box-sizing: border-box; font-size: 1rem;">
             @error('title')
                 <div style="color: red; margin-top: 0.5rem;">{{ $message }}</div>
@@ -20,7 +20,7 @@
             <label for="description"
                 style="display: block; text-transform: uppercase; color: #374151; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem;">Description</label>
             <textarea name="description" id="description" rows="4"
-                style="display: block; width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem; color: #1f2937; box-sizing: border-box; font-size: 1rem; font-family: inherit;"></textarea>
+                style="display: block; width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem; color: #1f2937; box-sizing: border-box; font-size: 1rem; font-family: inherit;">{{ old('description') }}</textarea>
             @error('description')
                 <div style="color: red; margin-top: 0.5rem;">{{ $message }}</div>
             @enderror
@@ -31,7 +31,7 @@
                 style="display: block; text-transform: uppercase; color: #374151; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem;">Long
                 Description</label>
             <textarea name="long_description" id="long_description" rows="10"
-                style="display: block; width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem; color: #1f2937; box-sizing: border-box; font-size: 1rem; font-family: inherit;"></textarea>
+                style="display: block; width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem; color: #1f2937; box-sizing: border-box; font-size: 1rem; font-family: inherit;">{{ old('long_description') }}</textarea>
             @error('long_description')
                 <div style="color: red; margin-top: 0.5rem;">{{ $message }}</div>
             @enderror
