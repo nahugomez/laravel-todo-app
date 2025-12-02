@@ -41,6 +41,16 @@ Route::post('/tasks', function (TaskRequest $request) {
     return redirect()->route('task.show', ['task'=> $task])->with('success', 'Task created successfully');
 })->name('task.store');
 
+# Toggle task completion
+Route::put('/tasks/{task}/toggle', function (Task $task) {
+    $task->update([
+        'completed' => !$task->completed,
+    ]);
+
+    # Redirect to the task list
+    return redirect()->route('task.show', ["task" => $task])->with('success', 'Task toggled successfully');
+})->name('task.toggle');
+
 # Update a task
 Route::put('/tasks/{task}', function (TaskRequest $request, Task $task) {
     $task->update($request->validated());

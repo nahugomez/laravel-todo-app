@@ -18,5 +18,10 @@
             @method('delete')
             <button type="submit">Delete</button>
         </form>
+        <form action="{{ route('task.toggle', ['task' => $task]) }}" method="post">
+            @csrf
+            @method('put')
+            <button type="submit">Toggle</button>
+        </form>
     </div>
 @endsection
