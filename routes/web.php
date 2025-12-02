@@ -1,10 +1,8 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Response;
-
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-
+use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 
 # -------------------------------
@@ -22,57 +20,33 @@ Route::get('/', function () {
 Route::view('/tasks/create', 'create')->name('task.create');
 
 # Edit a task view
-Route::get('/tasks/{id}/edit', function ($id) {
+Route::get('/tasks/{task}/edit', function (Task $task) {
     return view('edit', [
-        'task' => Task::findOrFail($id),
+        'task' => $task,
     ]);
 })->name('task.edit');
 
 # Get a specific task
-Route::get('/tasks/{id}', function ($id) {
+Route::get('/tasks/{task}', function (Task $task) {
     return view('task', [
-        'task' => Task::findOrFail($id),
+        'task' => $task,
     ]);
 })->name('task.show');
 
 # Store a new task
-Route::post('/tasks', function (Request $request) {
-    # Validate the request
-    $data = $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'required|string',
-        'long_description' => 'required|string',
-    ]);
-
-    # Create the task
-    $task = new Task();
-    $task->title = $data['title'];
-    $task->description = $data['description'];
-    $task->long_description = $data['long_description'];
-    $task->save();
+Route::post('/tasks', function (TaskRequest $request) {
+    $task = Task::create($request->validated());
 
     # Redirect to the task details
-    return redirect()->route('task.show', ['id'=> $task->id])->with('success', 'Task created successfully');
+    return redirect()->route('task.show', ['task'=> $task])->with('success', 'Task created successfully');
 })->name('task.store');
 
 # Update a task
-Route::put('/tasks/{id}', function (Request $request, $id) {
-    # Validate the request
-    $data = $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'required|string',
-        'long_description' => 'required|string',
-    ]);
-
-    # Update the task
-    $task = Task::findOrFail($id);
-    $task->title = $data['title'];
-    $task->description = $data['description'];
-    $task->long_description = $data['long_description'];
-    $task->save();
+Route::put('/tasks/{task}', function (TaskRequest $request, Task $task) {
+    $task->update($request->validated());
 
     # Redirect to the task details
-    return redirect()->route('task.show', ['id'=> $task->id])->with('success', 'Task updated successfully');
+    return redirect()->route('task.show', ['task'=> $task])->with('success', 'Task updated successfully');
 })->name('task.update');
 
 # Handle fallback routes

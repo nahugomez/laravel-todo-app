@@ -7,9 +7,10 @@
             <ul>
                 @foreach ($tasks as $task)
                     <li>{{ $task->title }} - {{ $task->completed ? 'Done' : 'Pending' }} - <a
-                            href="{{ route('task.show', ['id' => $task->id]) }}">Show</a></li>
+                            href="{{ route('task.show', ['task' => $task]) }}">Show</a></li>
                 @endforeach
             </ul>
         @endisset
+        <a href="{{ route('task.create') }}">Create New Task</a>
     </div>
 @endsection

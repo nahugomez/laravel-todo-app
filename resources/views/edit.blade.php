@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Edit Task</h1>
-    <form method="post" action="{{ route('task.update', ['id' => $task->id]) }}">
+    <form method="post" action="{{ route('task.update', ['task' => $task]) }}">
         @csrf
         @method('put')
         <div style="margin-bottom: 1.5rem;">
@@ -42,4 +42,5 @@
             style="background-color: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 0.375rem; border: none; font-weight: 600; cursor: pointer; font-size: 1rem; transition: background-color 0.2s;">Update
             Task</button>
     </form>
+    <a href="{{ route('task.index') }}" style="margin-top: 1.5rem; display: block; color: #2563eb; font-weight: 600; text-decoration: none;">Back to List</a>
 @endsection
