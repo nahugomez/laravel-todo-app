@@ -10,6 +10,13 @@
     <p>{{ $task->completed ? 'Done' : 'Pending' }}</p>
     <p>{{ $task->created_at }}</p>
     <p>{{ $task->updated_at }}</p>
-    <a href="{{ route('task.index') }}">Back to List</a>
-    <a href="{{ route('task.edit', ['task' => $task]) }}">Edit</a>
+    <div style="display: flex; gap: 1rem;">
+        <a href="{{ route('task.index') }}">Back to List</a>
+        <a href="{{ route('task.edit', ['task' => $task]) }}">Edit</a>
+        <form action="{{ route('task.destroy', ['task' => $task]) }}" method="post">
+            @csrf
+            @method('delete')
+            <button type="submit">Delete</button>
+        </form>
+    </div>
 @endsection

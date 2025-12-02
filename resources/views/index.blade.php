@@ -2,6 +2,9 @@
 @section('title', 'List of Tasks')
 @section('content')
     <h1>Todo App</h1>
+    @if (session('success'))
+        <div style="color: green; margin-bottom: 1.5rem;">{{ session('success') }}</div>
+    @endif
     <div>
         @isset($tasks)
             <ul>
